@@ -12,6 +12,7 @@ pygame.display.set_caption(("Second Game"))
 #배경이미지 삽입
 background = pygame.image.load('C:\\Users\\YoungWoo\\Desktop\\git\\python-study\\src\\yw\\background.png''')
 character = pygame.image.load('C:\\Users\\YoungWoo\\Desktop\\git\\python-study\\src\\yw\\character.png''')
+enemy = pygame.image.load('C:\\Users\\YoungWoo\\Desktop\\git\\python-study\\src\\yw\\enemy.png''')
 
 background_size = background.get_rect().size
 background_width = background_size[0]
@@ -27,8 +28,14 @@ character_y = 150
 
 speed_x = 0
 speed_y = 0
-
 speed = 1
+
+enemy_size = enemy.get_rect().size
+enemy_width = enemy_size[0]
+enemy_height = enemy_size[1]
+enemy_x = 400
+enemy_y = 200
+
 
 clock = pygame.time.Clock()
 
@@ -66,11 +73,25 @@ while running:
     if character_y + character_height >= background_height:
         character_y = background_height - character_height
 
+    #collision
+    character_rect = character.get_rect()
+    character_rect.left = character_x
+    character_rect.top = character_y
+
+    enemy_rect = enemy.get_rect()
+    enemy_rect.left = enemy_x
+    enemy_rect.top = enemy_y
+
+
+    if character_rect.colliderect(enemy_rect): ##충돌체크
+        print('Collision')
+        running = False
 
     screen.blit(background, (0,0))
     screen.blit(character, (character_x ,character_y))
+    screen.blit(enemy, (enemy_x, enemy_y))
 
-    print(speed_x, speed_y, str(clock.get_fps()), dt)
+
     pygame.display.update() # 게임화면 다시 그리기
 
 
