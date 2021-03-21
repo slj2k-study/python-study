@@ -31,10 +31,10 @@ for i in images:
     size.append((temp_xy[0], temp_xy[1]))
 
 position = []
+print(size)
 position.append([0, 0])
-position.append([size[0][0] / 2 - size[1][0] / 2, size[0][1] - size[1][1]])
+position.append([size[0][0] / 2 - size[1][0] / 2, size[0][1] - size[1][1] - 30] )
 position.append([0, 0])
-
 
 rect = []
 for i in images:
@@ -99,17 +99,15 @@ while running:
     screen.blit(images[1], position[1])
     screen.blit(images[2], position[2])
 
-    print(rect[2])
     for i in (1,2):
         rect[i].left = position[i][0]
         rect[i].top = position[i][1]
 
     if rect[1].colliderect(rect[2]):
         running = False
-
-
-
     pygame.display.update()  # 게임화면 다시 그리기
+
+
 
 
 pygame.time.delay(1000)
