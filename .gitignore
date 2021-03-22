@@ -2,3 +2,7 @@
 .idea/
 *.log
 __pycache__/
+__init__.py
+*.spec
+build/
+dist/
