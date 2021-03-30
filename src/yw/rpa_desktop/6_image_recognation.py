@@ -28,9 +28,55 @@ if trash:
     pyautogui.moveTo(trash)
 else:
     print('No data Found')
+
+trash = pyautogui.locateOnScreen("trash.png")
+'''
+
 '''
 trash = pyautogui.locateOnScreen("trash.png")
 while trash is None:
     trash = pyautogui.locateOnScreen("trash.png")
     print("Fail")
 pyautogui.moveTo(trash)
+'''
+
+#2 일정시간 기다리기
+import time
+import sys
+
+'''
+timeout = 2 #10초 대기
+start = time.time() #시작 시간 설정
+
+trash = None
+while trash is None:
+    trash = pyautogui.locateOnScreen("trash.png")
+    end = time.time() #종료시간 설정
+    if end - start > timeout: #지정한 10초를 초과시
+        print("시간 종료")
+        sys.exit()
+
+pyautogui.click(trash)
+'''
+def find_target(img_file, timeout= 30):
+        start = time.time()
+        target = None
+        while target is None:
+            target = pyautogui.locateOnScreen(img_file)
+            end = time.time()
+            if end - start > timeout:
+                break
+        return target
+
+
+def my_click(img_file, timeout=30):
+    target = find_target(img_file,timeout)
+    if target:
+        pyautogui.click(target)
+    else:
+        print("f[Timeout {timeout}s]")
+        sys.exit()
+
+my_click("trash.png",20)
+
+
